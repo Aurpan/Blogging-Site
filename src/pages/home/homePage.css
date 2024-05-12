@@ -1,0 +1,11 @@
+.blogCard-subtitle {
+  font-size: 13px;
+}
+
+.p-tag {
+  font-weight: 600;
+  font-size: 11px;
+  color: #6b7280;
+  background: none;
+  border: solid 2px;
+}
