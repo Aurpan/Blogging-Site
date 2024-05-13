@@ -6,13 +6,14 @@ import { useState } from "react";
 
 const BlogForm = () => {
   const [titleText, setTitleText] = useState("");
-  const [contentText, setContentText] = useState("");
+  const [contentText, setContentText] = useState({
+    textValue: "",
+    htmlValue: "",
+  });
   const [authorText, setAuthorText] = useState("");
-  const [tagsText, setTagsText] = useState("");
+  const [tagsText, setTagsText] = useState([]);
 
-  const blogFormSubmitHandler = (e) => {
-    // console.log(authorText);
-    // console.log(titleText);
+  const blogFormSubmitHandler = () => {
     console.log(contentText);
   };
 
@@ -35,8 +36,13 @@ const BlogForm = () => {
           <div className="card">
             <Editor
               style={{ height: "320px" }}
-              value={contentText}
-              onTextChange={(e) => setContentText(e.htmlValue)}
+              value={contentText.htmlValue}
+              onTextChange={(e) =>
+                setContentText({
+                  htmlValue: e.htmlValue,
+                  textValue: e.textValue,
+                })
+              }
             />
           </div>
         </div>
@@ -46,7 +52,10 @@ const BlogForm = () => {
         <div className="flex flex-column gap-2 md:w-full lg:w-6">
           <label htmlFor="title">Tags</label>
           <div className="card p-fluid">
-            <Chips />
+            <Chips
+              value={tagsText}
+              onChange={(e) => setTagsText(e.target.value)}
+            />
           </div>
           <small>
             ** write something and press 'Enter' to add relevant Tags for your

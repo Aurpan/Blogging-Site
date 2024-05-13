@@ -5,7 +5,7 @@ import { convertToHumanReadableDateString } from "../../../utility";
 import "../homePage.css";
 
 const BlogHighlightCard = ({ post }) => {
-  const { id, title, author, content, date, tags } = post;
+  const { id, title, author, contentText, date, tags } = post;
 
   const prepareSubtitle = () => {
     return (
@@ -18,11 +18,9 @@ const BlogHighlightCard = ({ post }) => {
   };
 
   const blogTags = () => {
-    const tagList = tags.split(",");
-
     return (
       <div className="card flex flex-wrap gap-2">
-        {tagList.map((tag, index) => {
+        {tags.map((tag, index) => {
           return <Tag value={tag} key={index} rounded />;
         })}
       </div>
@@ -44,7 +42,7 @@ const BlogHighlightCard = ({ post }) => {
           onClick={cardClickHandler}
           className="blog-highlight-card"
         >
-          <p className="m-0">{content}</p>
+          <p className="m-0">{contentText}</p>
         </Card>
       </div>
     </div>
