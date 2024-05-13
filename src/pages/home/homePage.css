@@ -14,3 +14,14 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
   transition: box-shadow 0.3s ease;
 }
+
+.floating-button {
+  bottom: 2rem !important; 
+  right: 2rem !important;
+  height: 4rem;
+  width: 4rem;
+}
+
+.floating-button .pi {
+  font-size: 1.5rem;
+}

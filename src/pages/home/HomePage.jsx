@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { useState } from "react";
 import BlogHighlightCard from "./components/BlogHighlightCard";
+import CreateBlogButton from "./components/CreateBlogButton";
 import { Toolbar } from "primereact/toolbar";
 import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
@@ -13,20 +14,21 @@ function HomePage() {
   const [searchFilter, setSearchFilter] = useState("");
 
   const searchKeyChangeHandler = (e) => {
-    const searchValue = e.target.value;
-    setSearchFilter(searchValue);  
+    let searchValue = e.target.value;
+    setSearchFilter(searchValue);
 
     if (searchValue === "") {
       setBlogList(blogPosts);
       return;
     }
 
+    searchValue = searchValue.toLowerCase();
     const filteredBlogs = blogPosts.filter(
       (blog) =>
-        blog.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-        blog.tags.toLowerCase().includes(searchValue.toLowerCase()) ||
-        blog.content.toLowerCase().includes(searchValue.toLowerCase()) ||
-        blog.author.toLowerCase().includes(searchValue.toLowerCase())
+        blog.title.toLowerCase().includes(searchValue) ||
+        blog.contentText.toLowerCase().includes(searchValue) ||
+        blog.author.toLowerCase().includes(searchValue) ||
+        blog.tags.some((tag) => tag.toLowerCase().includes(searchValue))
     );
     setBlogList(filteredBlogs);
   };
@@ -56,6 +58,8 @@ function HomePage() {
           <BlogHighlightCard post={post} />
         ))}
       </div>
+
+      <CreateBlogButton />
     </div>
   );
 }
