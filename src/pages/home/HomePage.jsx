@@ -12,17 +12,21 @@ function HomePage() {
   const [blogList, setBlogList] = useState(blogPosts);
   const [searchFilter, setSearchFilter] = useState("");
 
-  const searchKeyChangHandler = (e) => {
+  const searchKeyChangeHandler = (e) => {
     const searchValue = e.target.value;
-    setSearchFilter(searchValue);
+    setSearchFilter(searchValue);  
 
     if (searchValue === "") {
       setBlogList(blogPosts);
       return;
     }
-    debugger;
-    const filteredBlogs = blogPosts.filter((blog) =>
-      blog.title.includes(searchValue)
+
+    const filteredBlogs = blogPosts.filter(
+      (blog) =>
+        blog.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        blog.tags.toLowerCase().includes(searchValue.toLowerCase()) ||
+        blog.content.toLowerCase().includes(searchValue.toLowerCase()) ||
+        blog.author.toLowerCase().includes(searchValue.toLowerCase())
     );
     setBlogList(filteredBlogs);
   };
@@ -33,7 +37,7 @@ function HomePage() {
       <InputText
         placeholder="Search"
         value={searchFilter}
-        onChange={searchKeyChangHandler}
+        onChange={searchKeyChangeHandler}
       />
     </IconField>
   );

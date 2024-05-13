@@ -29,6 +29,10 @@ const BlogHighlightCard = ({ post }) => {
     );
   };
 
+  const cardClickHandler = (e) => {
+    console.log(id);
+  };
+
   return (
     <div className="col-12 md:col-6 lg:col-4">
       <div className="card">
@@ -37,6 +41,8 @@ const BlogHighlightCard = ({ post }) => {
           subTitle={prepareSubtitle}
           id={id}
           footer={blogTags}
+          onClick={cardClickHandler}
+          className="blog-highlight-card"
         >
           <p className="m-0">{content}</p>
         </Card>

@@ -9,3 +9,8 @@
   background: none;
   border: solid 2px;
 }
+
+.blog-highlight-card:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s ease;
+}
