@@ -3,9 +3,15 @@ import { Editor } from "primereact/editor";
 import { Chips } from "primereact/chips";
 import { Button } from "primereact/button";
 import { Toolbar } from "primereact/toolbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import blogsLogo from "../../assets/blogsLogo.svg";
 import CreateBlogButton from "../home/components/PageRoutingButton";
+import useBlogStore from "../../stores/blogStore";
+import useBlogIndexStore from "../../stores/blogIndexStore";
+import { useParams } from "react-router-dom";
+import { getCurrentDateAsFormatedString } from "../../utility";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../../custom-context/ToastContext";
 
 const BlogForm = () => {
   const [titleText, setTitleText] = useState("");
@@ -15,9 +21,57 @@ const BlogForm = () => {
   });
   const [authorText, setAuthorText] = useState("");
   const [tagsText, setTagsText] = useState([]);
+  const params = useParams();
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const { blogPosts, addBlogPost, removeBlogPost } = useBlogStore((state) => ({
+    blogPosts: state.blogPosts,
+    addBlogPost: state.addBlogPost,
+    removeBlogPost: state.removeBlogPost,
+  }));
+
+  const { maxIndex, incrementIndex } = useBlogIndexStore((state) => ({
+    maxIndex: state.maxIndex,
+    incrementIndex: state.incrementIndex,
+  }));
+
+  useEffect(() => {
+    if (params.id) {
+      const selectedBlog = blogPosts.filter((post) => post.id == params.id);
+
+      if (selectedBlog.length) {
+        console.log(selectedBlog[0]);
+        setTitleText(selectedBlog[0].title);
+        setAuthorText(selectedBlog[0].author);
+        setTimeout(() => {
+          setContentText({
+            textValue: selectedBlog[0].contentText,
+            htmlValue: selectedBlog[0].contentHtml,
+          });
+        }, 1 * 1000);
+        setTagsText(selectedBlog[0].tags);
+      }
+    }
+  }, []);
 
   const blogFormSubmitHandler = () => {
-    console.log(contentText);
+    addBlogPost({
+      id: maxIndex + 1,
+      title: titleText,
+      author: authorText,
+      date: getCurrentDateAsFormatedString(),
+      contentText: contentText.textValue,
+      contentHtml: contentText.htmlValue,
+      tags: tagsText,
+    });
+
+    incrementIndex();
+    toast.showToast({
+      headerText: "Success",
+      message: "Blog is added successfully.",
+    });
+    navigate("/home");
   };
 
   const toolbarStartElement = () => {

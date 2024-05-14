@@ -30,7 +30,7 @@ const BlogHighlightCard = ({ post }) => {
   };
 
   const cardClickHandler = () => {
-    navigate("/blog");
+    navigate(`/blog/${id}`);
   };
 
   return (

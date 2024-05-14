@@ -6,10 +6,13 @@ import { Toolbar } from "primereact/toolbar";
 import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
-import blogPosts from "../../service/dataService";
 import blogsLogo from "../../assets/blogsLogo.svg";
+import useBlogStore from "../../stores/blogStore";
 
 function HomePage() {
+  const { blogPosts } = useBlogStore((state) => ({
+    blogPosts: state.blogPosts,
+  }));
   const [blogList, setBlogList] = useState(blogPosts);
   const [searchFilter, setSearchFilter] = useState("");
 

@@ -20,6 +20,10 @@ const router = createBrowserRouter([
     path: "/blog",
     element: <BlogForm />,
   },
+  {
+    path: "/blog/:id",
+    element: <BlogForm />,
+  },
 ]);
 
 function App() {
