@@ -3,9 +3,11 @@ import { Card } from "primereact/card";
 import { Tag } from "primereact/tag";
 import { convertToHumanReadableDateString } from "../../../utility";
 import "../homePage.css";
+import { useNavigate } from "react-router-dom";
 
 const BlogHighlightCard = ({ post }) => {
   const { id, title, author, contentText, date, tags } = post;
+  const navigate = useNavigate();
 
   const prepareSubtitle = () => {
     return (
@@ -27,8 +29,8 @@ const BlogHighlightCard = ({ post }) => {
     );
   };
 
-  const cardClickHandler = (e) => {
-    console.log(id);
+  const cardClickHandler = () => {
+    navigate("/blog");
   };
 
   return (
