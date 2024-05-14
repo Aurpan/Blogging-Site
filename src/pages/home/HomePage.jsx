@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { useState } from "react";
 import BlogHighlightCard from "./components/BlogHighlightCard";
-import CreateBlogButton from "./components/CreateBlogButton";
+import CreateBlogButton from "./components/PageRoutingButton";
 import { Toolbar } from "primereact/toolbar";
 import { InputText } from "primereact/inputtext";
 import { IconField } from "primereact/iconfield";
@@ -59,7 +59,12 @@ function HomePage() {
         ))}
       </div>
 
-      <CreateBlogButton />
+      <CreateBlogButton
+        buttonPlacement="placement-bottom-left"
+        piIconClass="pi-plus"
+        redirectionUrl="/blog"
+        isPositionFixed={true}
+      />
     </div>
   );
 }

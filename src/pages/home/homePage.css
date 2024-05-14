@@ -15,13 +15,13 @@
   transition: box-shadow 0.3s ease;
 }
 
-.floating-button {
+.placement-bottom-left {
   bottom: 2rem !important; 
   right: 2rem !important;
   height: 4rem;
   width: 4rem;
 }
 
-.floating-button .pi {
+.routing-button .pi {
   font-size: 1.5rem;
 }

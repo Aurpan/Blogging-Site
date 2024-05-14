@@ -5,6 +5,7 @@ import { Button } from "primereact/button";
 import { Toolbar } from "primereact/toolbar";
 import { useState } from "react";
 import blogsLogo from "../../assets/blogsLogo.svg";
+import CreateBlogButton from "../home/components/PageRoutingButton";
 
 const BlogForm = () => {
   const [titleText, setTitleText] = useState("");
@@ -19,10 +20,21 @@ const BlogForm = () => {
     console.log(contentText);
   };
 
+  const toolbarStartElement = () => {
+    return (
+      <CreateBlogButton
+        buttonPlacement=""
+        piIconClass="pi-arrow-circle-left"
+        redirectionUrl="/home"
+      />
+    );
+  };
+
   return (
     <>
       <Toolbar
-        start={<h2>Create or Edit Your Post</h2>}
+        start={toolbarStartElement}
+        center={<h1>Create Post</h1>}
         end={<img src={blogsLogo} style={{ width: "100px", height: "40px" }} />}
       />
 
