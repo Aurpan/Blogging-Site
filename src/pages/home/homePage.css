@@ -16,7 +16,7 @@
 }
 
 .placement-bottom-left {
-  bottom: 2rem !important; 
+  bottom: 2rem !important;
   right: 2rem !important;
   height: 4rem;
   width: 4rem;
@@ -24,4 +24,8 @@
 
 .routing-button .pi {
   font-size: 1.5rem;
+}
+
+.card:hover {
+  cursor: pointer;
 }
